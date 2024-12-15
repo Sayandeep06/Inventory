@@ -9,6 +9,21 @@ router.get('/', async (req, res)=>{
   res.json(items)
 })
 
+router.get('/single', async(req,res)=>{
+  try {
+    const { _id } = req.body;
+    const response = await Item.findOne({
+      _id
+    });
+    res.json(response)
+  }
+  catch(error){
+    res.json({
+      message: error.message
+    })
+  }
+})
+
 router.post('/', async (req, res) => {
   try {
     const { name, quantity, price, description, category } = req.body;
